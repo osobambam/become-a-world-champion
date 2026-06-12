@@ -1,0 +1,28 @@
+import "./globals.css";
+
+export const metadata = {
+  title: "Be A World Champion",
+  description: "All-era squad draft & knockout tournament simulator",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        {/* "Matchday Print" type system — referenced by name in globals.css + inline styles.
+            Fraunces = editorial serif display, Archivo = grotesk UI, Spline Sans Mono = box-score numbers */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Archivo:wght@400;500;600;700;800&family=Spline+Sans+Mono:wght@400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}

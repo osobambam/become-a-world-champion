@@ -1,33 +1,47 @@
+/* ── "Matchday Print" design tokens ────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --paper: #f4efe1;       /* newsprint cream base */
+  --paper2: #eae2cf;      /* raised panels / zebra rows */
+  --paper3: #e1d8c1;      /* deeper inset */
+  --ink: #191710;         /* headlines + primary text */
+  --ink-soft: #6f6755;    /* secondary / muted labels */
+  --ink-faint: #a99f88;   /* tertiary / disabled */
+  --rule: #d6ccb4;        /* hairline dividers, card borders */
+  --rule-strong: #b9ab8a; /* heavier rules */
+  --accent: #cf2e2e;      /* spot red — CTAs, YOU, highlights, losses */
+  --accent-dark: #9e1f1f; /* pressed/hover red */
+  --pitch: #2f6f43;       /* wins / positive, printed-field green */
+  --gold: #a9802b;        /* legend tier (90+), champion */
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Spline Sans Mono", ui-monospace, "SFMono-Regular", monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100%;
+  background-color: var(--paper);
+  /* Faint paper-grain: layered halftone dots + a soft top vignette — CSS only */
+  background-image:
+    radial-gradient(circle at 50% -10%, rgba(207, 46, 46, 0.05), transparent 45%),
+    radial-gradient(rgba(25, 23, 16, 0.025) 1px, transparent 1px),
+    radial-gradient(rgba(25, 23, 16, 0.018) 1px, transparent 1px);
+  background-size: 100% 100%, 4px 4px, 4px 4px;
+  background-position: 0 0, 0 0, 2px 2px;
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-variant-numeric: tabular-nums;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 a {
@@ -35,8 +49,238 @@ a {
   text-decoration: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* ── Scrollbar ──────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 0;
+}
+::-webkit-scrollbar-track {
+  background: var(--paper2);
+}
+
+/* ── Primary button — inked stamp / ticket ──────────────────────────────────── */
+.sb {
+  background: var(--accent);
+  border: 1.5px solid var(--ink);
+  color: var(--paper);
+  font-family: var(--font-sans);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  padding: 12px 26px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform 0.12s, box-shadow 0.12s, background 0.15s;
+  line-height: 1;
+}
+.sb:hover:not(:disabled) {
+  background: var(--accent-dark);
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+.sb:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 var(--ink);
+}
+.sb:disabled {
+  opacity: 0.32;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ── Ghost / secondary button ───────────────────────────────────────────────── */
+.gb {
+  background: transparent;
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-soft);
+  font-family: var(--font-sans);
+  padding: 10px 18px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  transition: all 0.15s;
+  text-transform: uppercase;
+  border-radius: 0;
+}
+.gb:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+  background: var(--paper2);
+}
+
+/* ── Selectable card ────────────────────────────────────────────────────────── */
+.cb {
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  padding: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.16s;
+  width: 100%;
+  border-radius: 0;
+  box-shadow: 2px 2px 0 rgba(25, 23, 16, 0.08);
+}
+.cb:hover {
+  background: var(--paper2);
+  border-color: var(--accent);
+  box-shadow: 3px 3px 0 var(--accent);
+  transform: translate(-1px, -1px);
+}
+
+/* ── Pick row ───────────────────────────────────────────────────────────────── */
+.pr {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  padding: 9px 11px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  transition: all 0.13s;
+  border-radius: 0;
+}
+.pr:hover:not(:disabled) {
+  background: var(--paper2);
+  border-color: var(--accent);
+  transform: translateX(3px);
+}
+.pr:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* ── Layout + typographic helpers ───────────────────────────────────────────── */
+.sec {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 22px 16px;
+}
+.tag {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  color: var(--accent);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 6vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.02;
+  color: var(--ink);
+}
+
+/* ── Chips / tags ───────────────────────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 0;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  border: 1px solid;
+}
+.chip-amber {
+  background: rgba(207, 46, 46, 0.08);
+  border-color: rgba(207, 46, 46, 0.4);
+  color: var(--accent);
+}
+.chip-teal {
+  background: rgba(47, 111, 67, 0.1);
+  border-color: rgba(47, 111, 67, 0.4);
+  color: var(--pitch);
+}
+.chip-blue {
+  background: var(--paper2);
+  border-color: var(--rule-strong);
+  color: var(--ink-soft);
+}
+.chip-slate {
+  background: var(--paper2);
+  border-color: var(--rule-strong);
+  color: var(--ink-soft);
+}
+
+/* ── Rules + panels ─────────────────────────────────────────────────────────── */
+.div {
+  height: 0;
+  border-top: 1px solid var(--rule-strong);
+  margin: 14px 0;
+}
+.panel {
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: 0;
+  padding: 14px;
+  box-shadow: 2px 2px 0 rgba(25, 23, 16, 0.06);
+}
+
+/* ── Animations ─────────────────────────────────────────────────────────────── */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
   }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+/* Champion "inked stamp" — a slight rotated press-in instead of neon glow */
+@keyframes stampIn {
+  0% {
+    opacity: 0;
+    transform: scale(1.4) rotate(-8deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(0.94) rotate(-4deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(-3deg);
+  }
+}
+@keyframes tb {
+  from {
+    transform: scale(1) rotate(-3deg);
+  }
+  to {
+    transform: scale(1.05) rotate(3deg);
+  }
+}
+.pulse {
+  animation: pulse 1.2s infinite;
+}
+.tb {
+  animation: tb 0.8s ease infinite alternate;
+}
+.stamp {
+  animation: stampIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
