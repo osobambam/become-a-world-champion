@@ -1156,7 +1156,7 @@ const Leaderboard=({stats,title="Golden Boot Race"})=>{
 };
 
 // ── Shareable result card (native canvas, cross-platform) ─────────────────────
-const SHARE_URL="becomeaworldchampion.app"; // placeholder — swap when deployed
+const SHARE_URL="beaworldchampion.com";
 const POS_GROUP={GK:"#a9802b",
   CB:"#191710",LB:"#191710",RB:"#191710",LWB:"#191710",RWB:"#191710",
   CDM:"#2f6f43",CM:"#2f6f43",CAM:"#2f6f43",LM:"#2f6f43",RM:"#2f6f43",
