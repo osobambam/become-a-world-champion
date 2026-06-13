@@ -1157,6 +1157,7 @@ const Leaderboard=({stats,title="Golden Boot Race"})=>{
 
 // ── Shareable result card (native canvas, cross-platform) ─────────────────────
 const SHARE_URL="beaworldchampion.com";
+const BMC_URL="https://buymeacoffee.com/beaworldchampion"; // ← update handle after signup
 const POS_GROUP={GK:"#a9802b",
   CB:"#191710",LB:"#191710",RB:"#191710",LWB:"#191710",RWB:"#191710",
   CDM:"#2f6f43",CM:"#2f6f43",CAM:"#2f6f43",LM:"#2f6f43",RM:"#2f6f43",
@@ -1531,6 +1532,13 @@ const TournamentSummary=({matchLog,slots,finishedStage,projStageIdx,myRating,dif
         </div>
       </div>
 
+      <div style={{textAlign:"center",marginTop:14}}>
+        <a href={BMC_URL} target="_blank" rel="noopener noreferrer"
+           style={{display:"inline-flex",alignItems:"center",gap:6,fontFamily:"var(--font-sans)",fontSize:"0.72rem",fontWeight:600,color:"#6f6755",textDecoration:"none",borderBottom:"1px dashed #c8bfa6",paddingBottom:2}}>
+          ☕ Enjoying the game? Support the hosting
+        </a>
+      </div>
+
       {/* Share preview modal */}
       {shareModal&&(
         <div onClick={closeShare} style={{position:"fixed",inset:0,zIndex:200,background:"rgba(25,23,16,0.72)",display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
@@ -1900,6 +1908,12 @@ export default function WorldCupDraft(){
           <footer style={{maxWidth:560,margin:"34px auto 0",paddingTop:18,borderTop:"3px double #b9ab8a",textAlign:"center"}}>
             <div style={{fontFamily:"var(--font-sans)",fontSize:"0.72rem",color:"#6f6755",marginBottom:10}}>
               Inspired by and with thanks to <a href="https://38-0.app" target="_blank" rel="noopener noreferrer" style={{color:"#cf2e2e",textDecoration:"underline",textUnderlineOffset:2}}>38-0.app</a>
+            </div>
+            <div style={{marginBottom:12}}>
+              <a href={BMC_URL} target="_blank" rel="noopener noreferrer"
+                 style={{display:"inline-flex",alignItems:"center",gap:6,fontFamily:"var(--font-sans)",fontSize:"0.74rem",fontWeight:700,color:"#191710",background:"#f4c430",border:"2px solid #191710",borderRadius:6,padding:"7px 14px",textDecoration:"none",boxShadow:"2px 2px 0 #191710"}}>
+                ☕ Buy me a coffee
+              </a>
             </div>
             <div style={{fontFamily:"var(--font-mono)",fontSize:"0.62rem",letterSpacing:"1px",color:"#a99f88",marginBottom:14}}>
               © 2026 Be A World Champion · All rights reserved
