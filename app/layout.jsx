@@ -2,8 +2,21 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
+  metadataBase: new URL("https://beaworldchampion.com"),
   title: "Be A World Champion",
-  description: "All-era squad draft & knockout tournament simulator",
+  description: "All-era squad draft & knockout tournament simulator. Draft your XI, spin the wheel, and chase the trophy.",
+  openGraph: {
+    title: "Be A World Champion",
+    description: "Draft an all-era XI, spin the wheel, and win the tournament.",
+    url: "https://beaworldchampion.com",
+    siteName: "Be A World Champion",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Be A World Champion",
+    description: "Draft an all-era XI, spin the wheel, and win the tournament.",
+  },
 };
 
 export default function RootLayout({ children }) {
