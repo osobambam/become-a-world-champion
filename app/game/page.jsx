@@ -1963,18 +1963,8 @@ export default function WorldCupDraft(){
               {filled===11&&<button className="sb" style={{fontSize:"0.95rem",padding:"9px 20px"}} onClick={()=>setPhase("lineup")}>DONE →</button>}
             </div>
           </div>
-          <div style={{marginBottom:16}}>
-            {draftMode==="position-first"&&(
-              <div style={{fontFamily:"var(--font-sans)",fontSize:"0.66rem",letterSpacing:"3px",color:"#6f6755",marginBottom:8,textTransform:"uppercase",textAlign:"center"}}>
-                {activeIdx!==null?<span>Filling: <strong style={{color:"#cf2e2e",fontSize:"0.8rem"}}>{slots[activeIdx]?.pos}</strong> — now spin</span>:"Tap a position to select it, then spin"}
-              </div>
-            )}
-            <Pitch formation={formation} slots={slots} activeIdx={activeIdx}
-              onSlot={i=>{if(draftMode==="position-first"&&!slots[i]?.player)setActiveIdx(i);}}
-              clickable={draftMode==="position-first"}/>
-          </div>
           {(draftMode==="spin-first"||activeIdx!==null)&&filled<11&&(
-            <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:14,padding:"18px 0 6px"}}>
+            <div style={{display:"flex",flexDirection:"column",alignItems:"center",gap:14,padding:"6px 0 18px"}}>
               {draftMode==="spin-first"&&(
                 <div style={{fontFamily:"var(--font-sans)",fontSize:"0.72rem",color:"#6f6755",letterSpacing:"2px",textAlign:"center",textTransform:"uppercase"}}>Spin · Pick a player · Place on pitch</div>
               )}
@@ -1996,6 +1986,16 @@ export default function WorldCupDraft(){
               {spinning&&<div className="pulse" style={{fontFamily:"var(--font-mono)",color:"#cf2e2e",fontSize:"0.75rem",letterSpacing:"4px"}}>DRAWING…</div>}
             </div>
           )}
+          <div style={{marginBottom:16}}>
+            {draftMode==="position-first"&&(
+              <div style={{fontFamily:"var(--font-sans)",fontSize:"0.66rem",letterSpacing:"3px",color:"#6f6755",marginBottom:8,textTransform:"uppercase",textAlign:"center"}}>
+                {activeIdx!==null?<span>Filling: <strong style={{color:"#cf2e2e",fontSize:"0.8rem"}}>{slots[activeIdx]?.pos}</strong> — spin above</span>:"Tap a position to select it, then spin"}
+              </div>
+            )}
+            <Pitch formation={formation} slots={slots} activeIdx={activeIdx}
+              onSlot={i=>{if(draftMode==="position-first"&&!slots[i]?.player)setActiveIdx(i);}}
+              clickable={draftMode==="position-first"}/>
+          </div>
           {draftMode==="position-first"&&activeIdx===null&&filled<11&&(
             <div style={{textAlign:"center",padding:"24px 0",fontFamily:"var(--font-sans)",color:"#6f6755",fontSize:"0.82rem",letterSpacing:"2px"}}>↑ TAP A POSITION ABOVE TO DRAFT</div>
           )}
